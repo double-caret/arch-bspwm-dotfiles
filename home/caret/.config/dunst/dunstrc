@@ -1,0 +1,59 @@
+[global]
+    font = FiraCode Nerd Font 14
+    markup = full
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = center
+    bounce_freq = 0
+    show_age_threshold = 300
+    word_wrap = yes
+    ignore_newline = no
+    frame_width = 3
+    stack_duplicates = true
+    shrink = no
+    transparency = 10
+    geometry = "400x50-15+40"
+    idle_threshold = 120
+    monitor = 0
+    follow = mouse
+    sticky_history = yes
+    history_length = 20
+    show_indicators = yes
+    line_height = 1
+    separator_height = 2
+    padding = 12
+    horizontal_padding = 10
+    separator_color = auto
+    startup_notification = false
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/firefox -new-tab
+    icon_position = left
+    icon_folders =.icons/Papirus-Dark/24x24/status/:~/.icons/Papirus-Dark/24x24/actions
+    frame_color = "#3b4252"
+    separator_color = auto
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+shift+h
+    context = ctrl+shift+period
+    
+[nord_low]
+    msg_urgency = low
+    background = "#2E3440"
+    foreground = "#D8DEE9"
+
+[nord_normal]
+    msg_urgency = normal
+    background = "#2E3440"
+    foreground = "#D8DEE9"
+    
+[nord_critical]
+    msg_urgency = critical
+    background = "#2E3440"
+    foreground = "#D8DEE9"
+
