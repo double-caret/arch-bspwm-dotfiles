@@ -1,12 +1,12 @@
 #! /bin/sh
 
-sxhkd &
-feh --bg-scale ~/Downloads/gentoo_background.jpg &
-setxkbmap us,ara -option grp:lalt_lshift_toggle &
-polybar top &
-picom --experimental-backends &
-buckle &
-dunst &
+pidof sxhkd     || sxhkd &
+pidof feh       || feh --bg-scale ~/Downloads/gentoo_background.jpg &
+pidof setxkbmap || setxkbmap us,ara -option grp:lalt_lshift_toggle &
+pidof polybar   || polybar top &
+pidof picom     || picom --experimental-backends &
+pidof buckle    || buckle &
+pidof dunst     || dunst &
 
 # Border colors
 bspc config normal_border_color   "#0A0E14"
@@ -19,12 +19,6 @@ bspc monitor -d I II III IV V VI VII
 bspc config border_width         2
 bspc config window_gap          12
 
-bspc config split_ratio          0.666667
+bspc config split_ratio          0.67
 bspc config borderless_monocle   false
 bspc config gapless_monocle      false
-
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off

@@ -64,7 +64,7 @@ super + v
 # unhide window
 #make it float, add this to the end "floating -f"
 super + shift + v
-	bspc node {,$(bspc query -N -n .hidden |tail -n 1)} -g hidden=off -d $(bspc query -D -d focused --names) 
+	bspc node {,$(bspc query -N -n .hidden |tail -n 1)} -t floating -g hidden=off -d focused -f
 
 super + grave
   ~/Documents/scripts/monocle_hide.sh &
