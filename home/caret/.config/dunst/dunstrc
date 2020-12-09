@@ -1,5 +1,5 @@
 [global]
-    font = FiraCode Nerd Font 14
+    font = FiraCode Nerd Font 11
     markup = full
     format = "<b>%s</b>\n%b"
     sort = yes
