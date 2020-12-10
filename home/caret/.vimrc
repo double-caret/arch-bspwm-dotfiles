@@ -13,6 +13,7 @@ Plug 'puremourning/vimspector'
 Plug 'wellle/targets.vim'
 Plug 'christoomey/vim-run-interactive'
 Plug 'gabrielsimoes/cfparser.vim'
+Plug 'chrisbra/Colorizer'
 call plug#end()
 """
 
