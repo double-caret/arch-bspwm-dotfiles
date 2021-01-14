@@ -16,7 +16,7 @@ super + shift + p
   ~/Documents/scripts/slop_print_screen.sh &
 # program launcher
 super + @space
-	rofi -show drun -sorting-method fzf -sort -matching fuzzy -show-icons -icon-theme Papirus-Dark
+  rofi -combi-modi window,drun -show combi -modi combi -sorting-method fzf -sort -matching fuzzy -show-icons -icon-theme Papirus-Dark
 
 # make sxhkd reload its configuration files:
 super + Escape

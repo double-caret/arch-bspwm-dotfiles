@@ -11,10 +11,11 @@
 background = #2E3440 
 background-alt = #4c566a
 foreground = #D8DEE9 
-foreground-alt = #D8DEE9
+foreground-alt = #5E81AC
 primary = #A3BE8C
 secondary = #B48EAD
 alert = #D08770
+underline = #81A1C1
 
 [bar/top]
 width = 98%
@@ -28,10 +29,10 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
-line-color = #f00
+line-color = #5E81AC
 
 border-size = 0
-border-color = #00000000
+border-color = #000000
 
 padding-left = 0
 padding-right = 2
@@ -43,12 +44,11 @@ font-1 = "Hack:style=Regular:size=12;0"
 font-3 = "Font Awesome 5 Brands:pixelsize=12;1"
 modules-left = bspwm
 modules-center = xwindow 
-modules-right = wlan eth volume xkeyboard date
+modules-right = wlan eth temperature cpu volume xkeyboard date
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
+tray-transparent = true
 
 ;wm-restack = bspwm
 wm-restack = bspwm
@@ -128,7 +128,7 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.primary}
 format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
@@ -167,7 +167,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.foreground}
 label-empty-padding = 2
 
 [module/i3]
@@ -242,15 +242,15 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.alert}
 format-underline = ${colors.primary}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.primary}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -261,7 +261,8 @@ interface = wlan0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.foreground}
+format-connected-underline = ${colors.secondary}
+label-connected-foreground = ${colors.foreground}
 label-connected = %essid% %downspeed% %upspeed% 
 ;format-disconnected =
 format-disconnected = <label-disconnected>
@@ -274,26 +275,26 @@ ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
 interface = enp7s0
 interval = 3.0
 
-format-connected-underline = #55aa55
+format-connected-underline = $colors.underline
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+format-connected-prefix-foreground = ${colors.secondary}
+label-connected = %local_ip% %downspeed% %upspeed%
 
 ;format-disconnected =
-format-disconnected = <label-disconnected>
-format-disconnected-prefix = " "
-format-disconnected-prefix-foreground = ${colors.foreground-alt}
+; format-disconnected = <label-disconnected>
+; format-disconnected-prefix = " "
+; format-disconnected-prefix-foreground = ${colors.foreground-alt}
 
-format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname%
-label-disconnected-foreground = ${colors.alert}
+; format-disconnected-underline = ${self.format-connected-underline}
+; label-disconnected = %ifname%
+; label-disconnected-foreground = ${colors.alert}
 
 [module/date]
 type = internal/date
@@ -306,8 +307,8 @@ time = %H:%M:%S
 time-alt = %H:%M
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+format-prefix-foreground = ${colors.primary}
+format-underline = ${colors.alert}
 
 label = %date% %time%
 
@@ -315,27 +316,30 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+format-underline  = ${colors.secondary}
+label-volume = ""
+label-volume-foreground = ${colors.primary}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.alert}
-label-muted = sound muted
+format-muted-underline  = ${colors.alert}
+
+label-muted =muted
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.primary}
+bar-volume-foreground-6 = ${colors.primary}
 bar-volume-gradient = false
-bar-volume-indicator = |
+bar-volume-indicator = 
 bar-volume-indicator-font = 2
-bar-volume-fill = ─
+bar-volume-fill = 
 bar-volume-fill-font = 2
-bar-volume-empty = ─
+bar-volume-empty = 
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
@@ -346,7 +350,7 @@ adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = ${colors.alert}
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
@@ -383,7 +387,7 @@ label-warn-foreground = ${colors.secondary}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.alert}
 
 [module/powermenu]
 type = custom/menu

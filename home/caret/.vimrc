@@ -5,6 +5,8 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -20,6 +22,7 @@ call plug#end()
 """generics
 set encoding=utf-8
 syntax on
+set cursorline
 set relativenumber
 set number
 set nohlsearch
@@ -39,8 +42,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 """theme
 "set termguicolors     " enable true colors suppor
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 colorscheme nord
 "let g:airline_theme='ayu_dark'
 highlight clear ALEErrorSign
@@ -60,18 +61,18 @@ highlight clear ToolbarLine
 
 """fixes
 augroup FastEscape
-	    autocmd!
-	    au InsertEnter * set timeoutlen=0
-	    au InsertLeave * set timeoutlen=1000
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
 augroup END
 "fix bad indentation after paste, thanks to Marcin Kulik @coderwall.com
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 function! XTermPasteBegin()
-	  set pastetoggle=<Esc>[201~
-	  set paste
-	  return ""
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
 endfunction
 """
 
@@ -82,41 +83,42 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 """
 
-"""fern
+""fern
+let g:fern#renderer = "nerdfont"
 let g:fern#default_hidden=1
 augroup my-fern-startup
-	  autocmd! *
-	  autocmd VimEnter * ++nested Fern . -reveal=% -drawer -stay
+  autocmd! *
+  autocmd VimEnter * ++nested Fern . -reveal=% -drawer -stay
 augroup END
 
 function! s:init_fern() abort
-"Use 'select' instead of 'edit' for default 'open' action
-	set norelativenumber
-	set signcolumn=no
-	set nonumber
-	nmap <buffer><expr>
-	        \ <Plug>(fern-my-expand-or-enter)
-	        \ fern#smart#drawer(
-	        \   "\<Plug>(fern-open-or-expand)",
-	        \   "\<Plug>(fern-open-or-enter)",
-	        \ )
-	  nmap <buffer><expr>
-	          \ <Plug>(fern-my-collapse-or-leave)
-	          \ fern#smart#drawer(
-	          \   "\<Plug>(fern-action-collapse)",
-	          \   "\<Plug>(fern-action-leave)",
-	          \ )
-	    nmap <buffer><nowait> l <Plug>(fern-my-expand-or-enter)
-	    nmap <buffer><nowait> <enter> <Plug>(fern-my-expand-or-enter)
-	    nmap <buffer><nowait> <Right> <Plug>(fern-my-expand-or-enter)
-	    nmap <buffer><nowait> h <Plug>(fern-my-collapse-or-leave)
-	    nmap <buffer><nowait> <Left> <Plug>(fern-my-collapse-or-leave)
+  "Use 'select' instead of 'edit' for default 'open' action
+  set norelativenumber
+  set signcolumn=no
+  set nonumber
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-expand-or-enter)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-open-or-expand)",
+        \   "\<Plug>(fern-open-or-enter)",
+        \ )
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-collapse-or-leave)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-action-collapse)",
+        \   "\<Plug>(fern-action-leave)",
+        \ )
+  nmap <buffer><nowait> l <Plug>(fern-my-expand-or-enter)
+  nmap <buffer><nowait> <enter> <Plug>(fern-my-expand-or-enter)
+  nmap <buffer><nowait> <Right> <Plug>(fern-my-expand-or-enter)
+  nmap <buffer><nowait> h <Plug>(fern-my-collapse-or-leave)
+  nmap <buffer><nowait> <Left> <Plug>(fern-my-collapse-or-leave)
 endfunction
 augroup fern-custom
-	autocmd! *
-	autocmd FileType fern call s:init_fern()
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
 augroup END
-"""
+""
 
 """coc
 " TextEdit might fail if hidden is not set.
@@ -282,10 +284,10 @@ nnoremap <silent> a :set opfunc=Append<CR>g@
 nnoremap <silent> i :set opfunc=Insert<CR>g@
 
 function! Append(type, ...)
-    call feedkeys("`]a", 'n')
+  call feedkeys("`]a", 'n')
 endfunction
 
 function! Insert(type, ...)
-    call feedkeys("`[i", 'n')
+  call feedkeys("`[i", 'n')
 endfunction
 """"
